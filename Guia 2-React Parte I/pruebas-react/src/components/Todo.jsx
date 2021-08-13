@@ -1,5 +1,14 @@
 import React from "react";
-const Todo = () => {
-  return <h1>Todo component</h1>;
+const Todo = ({ todo,index,deleteTodo }) => {
+  return (
+    <>
+      <div className="list">
+          <h3>{todo}</h3>
+          <button className="btn-delete" onClick={
+              ()=>deleteTodo(index)
+          }>X</button>
+      </div>
+    </>
+  );
 };
 export default Todo;
