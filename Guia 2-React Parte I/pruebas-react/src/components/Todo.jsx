@@ -1,4 +1,5 @@
 import React from "react";
+
 const Todo = ({ todo,index,deleteTodo }) => {
   return (
     <>
@@ -9,6 +10,6 @@ const Todo = ({ todo,index,deleteTodo }) => {
           }>X</button>
       </div>
     </>
-  );
-};
+  )
+}
 export default Todo;
