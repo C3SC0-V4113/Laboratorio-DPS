@@ -1,10 +1,11 @@
 import React from "react";
 
-const Todo = ({ todo,index,deleteTodo }) => {
+const Todo = ({ todo,index,llave,deleteTodo }) => {
+  //console.log(llave+'---'+index+'---'+todo);
   return (
     <>
       <div className="list">
-          <h3>{todo}</h3>
+          <h3>{llave}-{todo}</h3>
           <button className="btn-delete" onClick={
               ()=>deleteTodo(index)
           }>X</button>
