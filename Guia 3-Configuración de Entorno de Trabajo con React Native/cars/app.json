@@ -1,4 +1,8 @@
 {
   "name": "cars",
-  "displayName": "cars"
+  "displayName": "cars",
+  "expo": {
+    "name": "cars",
+    "slug": "cars"
+  }
 }
