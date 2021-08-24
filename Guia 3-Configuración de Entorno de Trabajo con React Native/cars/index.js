@@ -8,9 +8,9 @@ import {Text,View} from 'react-native';
 const textosaludo=()=>{
     return(
         <View style={{flex:1,justifyContent:"center",alignItems:"center"}}>
-            <Text>"Hola Mundo"</Text>
+            <Text>"Hola Mundo, soy CESCO"</Text>
         </View>
     );
 }
 
-AppRegistry.registerComponent("cars",()=>textosaludo);
+AppRegistry.registerComponent("main",()=>textosaludo);
