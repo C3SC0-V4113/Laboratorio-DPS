@@ -73,4 +73,4 @@ const styles=StyleSheet.create({
     },
 });
 
-AppRegistry.registerComponent("main",()=>App);
+AppRegistry.registerComponent("cars",()=>App);
