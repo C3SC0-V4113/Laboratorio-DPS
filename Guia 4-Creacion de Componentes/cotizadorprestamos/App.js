@@ -6,7 +6,12 @@
  * @flow strict-local
  */
 
-import React from 'react';
+// npx react-native run-android
+// npx @react-native-community/cli doctor
+//expo start --clear
+//keytool -genkey -v -keystore my-upload-key.keystore -alias my-key-alias -keyalg RSA -keysize 2048 -validity 10000
+
+import React, {useState, useEffect} from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -25,87 +30,83 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
-const Section = ({children, title}): Node => {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  );
-};
+import colors from './src/utils/colors';
+import Form from './src/components/Forms';
+import Footer from './src/components/Footer';
+import Result from './src/components/Result';
 
-const App: () => Node = () => {
-  const isDarkMode = useColorScheme() === 'dark';
+export default function App() {
+  const [capital, setCapital] = useState(null);
+  const [interest, setInterest] = useState(null);
+  const [months, setMonths] = useState(null);
+  const [total, setTotal] = useState(null);
+  const [errorMessage, setErrorMessage] = useState('');
 
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
+  useEffect(() => {
+    if (capital && interest && months) {
+      calculate();
+    } else {
+      reset();
+    }
+  }, [capital, interest, months]);
+
+  const calculate = () => {
+    reset();
+    if (!capital) {
+      setErrorMessage('Añade la cantidad que quieres solicitar');
+    } else if (!interest) {
+      setErrorMessage('Añade el interes del prestamos');
+    } else if (!months) {
+      setErrorMessage('Seleccióna los meses a pagar');
+    } else {
+      const i = interest / 100;
+      const fee = capital / ((1 - Math.pow(i + 1, -months)) / i);
+      setTotal({
+        monthlyFee: fee.toFixed(2).replace('.', ','),
+        totalPayable: (fee * months).toFixed(2).replace('.', ','),
+      });
+    }
+  };
+
+  const reset = () => {
+    setErrorMessage('');
+    setTotal(null);
   };
 
   return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.js</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+    <>
+      <StatusBar barStyle="light-content" />
+      <SafeAreaView style={styles.Header}>
+        <Text style={styles.HeadApp}>Cotizador de Prestamos</Text>
+        <Form
+          setCapital={setCapital}
+          setInterest={setInterest}
+          setMonths={setMonths}
+        />
+      </SafeAreaView>
+      <Result
+        capital={capital}
+        interest={interest}
+        months={months}
+        total={total}
+        errorMessage={errorMessage}
+      />
+      <Footer></Footer>
+    </>
   );
-};
-
+}
 const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
+  Header: {
+    backgroundColor: colors.PRIMARY_COLOR,
+    height: 200,
+    borderBottomLeftRadius: 30,
+    borderBottomRightRadius: 30,
+    alignItems: 'center',
   },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
+  HeadApp: {
+    fontSize: 25,
+    fontWeight: 'bold',
+    color: '#fff',
+    marginTop: 15,
   },
 });
-
-export default App;
