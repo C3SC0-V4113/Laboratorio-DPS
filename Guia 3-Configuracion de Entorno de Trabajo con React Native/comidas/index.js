@@ -8,6 +8,7 @@ import {
   StyleSheet,
   StatusBar,
   Image,
+  ScrollView,
 } from 'react-native';
 /*import App from './App';*/
 import {name as appName} from './app.json';
@@ -35,7 +36,14 @@ const users = [
     id: 2,
     nombre: 'Elotes Locos',
     src: require('./src/imgs/elotes.jpg'),
-    ingredientes: ['elote', 'queso rayado', 'Ketchup', 'Mostaza', 'Mayonesa', 'Salsa Negra'],
+    ingredientes: [
+      'elote',
+      'queso rayado',
+      'Ketchup',
+      'Mostaza',
+      'Mayonesa',
+      'Salsa Negra',
+    ],
   },
   {
     id: 3,
@@ -47,48 +55,66 @@ const users = [
     id: 4,
     nombre: 'Tamales de Pollo',
     src: require('./src/imgs/tamales.jpg'),
-    ingredientes: ['Pollo', 'Tomate', 'Zanahora', 'Papas', 'Masa de Maiz', 'Chiles Dulces', 'Cebolla'],
+    ingredientes: [
+      'Pollo',
+      'Tomate',
+      'Zanahora',
+      'Papas',
+      'Masa de Maiz',
+      'Chiles Dulces',
+      'Cebolla',
+    ],
   },
   {
     id: 5,
     nombre: 'Yuca Frita/Salcochada',
     src: require('./src/imgs/yuca.jpg'),
-    ingredientes: ['Yuca', 'Ajo', 'Tomate', 'Salsa', 'Curtido', 'Chicharrón', 'Pepescas'],
+    ingredientes: [
+      'Yuca',
+      'Ajo',
+      'Tomate',
+      'Salsa',
+      'Curtido',
+      'Chicharrón',
+      'Pepescas',
+    ],
   },
 ];
 
 const App = () => {
   return (
     <SafeAreaView style={styles.container}>
-      <ThemeProvider>
-        {users.map((u, i) => {
-          return (
-            <Card key={u.id} style={styles.container}>
-              <Card.Title style={styles.title}>{u.nombre}</Card.Title>
-              <Card.Divider />
-              <View>
-                <View style={styles.item}>
-                  <Image style={styles.img} source={u.src} />
-                </View>
+      <ScrollView>
+        <ThemeProvider>
+          {users.map((u, i) => {
+            return (
+              <Card key={u.id} style={styles.container}>
+                <Card.Title style={styles.title}>{u.nombre}</Card.Title>
+                <Card.Divider />
+                <View>
+                  <View style={styles.item}>
+                    <Image style={styles.img} source={u.src} />
+                  </View>
 
-                {u.ingredientes.map((ingre, id) => {
-                  return (
-                    <View key={id}>
-                      <ListItem bottomDivider>
-                        <ListItem.Content>
-                          <ListItem.Title>
-                            <Text>{ingre}</Text>
-                          </ListItem.Title>
-                        </ListItem.Content>
-                      </ListItem>
-                    </View>
-                  );
-                })}
-              </View>
-            </Card>
-          );
-        })}
-      </ThemeProvider>
+                  {u.ingredientes.map((ingre, id) => {
+                    return (
+                      <View key={id}>
+                        <ListItem bottomDivider>
+                          <ListItem.Content>
+                            <ListItem.Title>
+                              <Text>{ingre}</Text>
+                            </ListItem.Title>
+                          </ListItem.Content>
+                        </ListItem>
+                      </View>
+                    );
+                  })}
+                </View>
+              </Card>
+            );
+          })}
+        </ThemeProvider>
+      </ScrollView>
     </SafeAreaView>
   );
 };
