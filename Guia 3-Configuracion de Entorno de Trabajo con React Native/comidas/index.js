@@ -30,15 +30,15 @@ const users = [
     id: 1,
     nombre: 'Pupusas',
     src: require('./src/imgs/pupusas.jpg'),
-    ingredientes: ['queso', 'frijoles', 'masa de maíz', 'salsa'],
+    ingredientes: ['Queso', 'Frijoles', 'Masa de Maíz', 'Salsa'],
   },
   {
     id: 2,
     nombre: 'Elotes Locos',
     src: require('./src/imgs/elotes.jpg'),
     ingredientes: [
-      'elote',
-      'queso rayado',
+      'Elote',
+      'Queso rayado',
       'Ketchup',
       'Mostaza',
       'Mayonesa',
