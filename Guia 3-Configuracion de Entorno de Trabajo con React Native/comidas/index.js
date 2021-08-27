@@ -11,8 +11,13 @@ import {
 } from 'react-native';
 /*import App from './App';*/
 import {name as appName} from './app.json';
-import {Card} from 'react-native-elements/dist/card/Card';
-//import {Card, ListItem, Button, Icon} from 'react-native-elements';
+import {
+  Card,
+  ListItem,
+  Button,
+  Icon,
+  ThemeProvider,
+} from 'react-native-elements';
 
 // npx react-native run-android
 // npx @react-native-community/cli doctor
@@ -21,66 +26,68 @@ import {Card} from 'react-native-elements/dist/card/Card';
 
 const users = [
   {
-    id: '1',
-    name: 'brynn',
-    src:require('./src/imgs/pupusas.jpg'),
-  },
-  {
-    id: '2',
-    name: 'cesco',
-    src:require('./src/imgs/elotes.jpg'),
+    id: 1,
+    nombre: 'Pupusas',
+    src: require('./src/imgs/pupusas.jpg'),
+    ingredientes: ['queso', 'frijoles', 'masa de maíz', 'salsa'],
   },
 ];
 
-const Item = ({name,img}) => (
-  <View style={styles.item}>
-
-      <Image
-        style={styles.image}
-        source={img}
-      />
-      <Text style={styles.name}>{name}</Text>
-    
-  </View>
-);
-
 const App = () => {
-  const renderItem = ({item}) => (
-    <Item name={item.name} img={item.src} />
-  );
   return (
     <SafeAreaView style={styles.container}>
-      <FlatList
-        data={users}
-        renderItem={renderItem}
-        keyExtractor={item => item.id}
-      />
+      <ThemeProvider>
+        {users.map((u, i) => {
+          return (
+            <Card key={u.id} style={styles.container}>
+              <Card.Title style={styles.title}>{u.nombre}</Card.Title>
+              <Card.Divider />
+              <View>
+                <View style={styles.item}>
+                  <Image style={styles.img} source={u.src} />
+                </View>
+
+                {u.ingredientes.map((ingre, id) => {
+                  return (
+                    <View key={id}>
+                      <ListItem bottomDivider>
+                        <ListItem.Content>
+                          <ListItem.Title>
+                            <Text>{ingre}</Text>
+                          </ListItem.Title>
+                        </ListItem.Content>
+                      </ListItem>
+                    </View>
+                  );
+                })}
+              </View>
+            </Card>
+          );
+        })}
+      </ThemeProvider>
     </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
-    container:{
-        flex: 1,
-        marginTop: StatusBar.currentHeight || 0,
-    },
-  item:{
-    backgroundColor: '#f9c2ff',
+  container: {
+    flex: 1,
+    marginTop: StatusBar.currentHeight || 0,
+  },
+  title: {
+    fontSize: 32,
+  },
+  item: {
     padding: 20,
     marginVertical: 8,
     marginHorizontal: 16,
     alignItems: 'center',
   },
-  name:{
-    fontSize: 32,
-    color:'black',
-  },
-  image:{
+  img: {
     width: 200,
     height: 125,
-    resizeMode:'contain',
     borderWidth: 2,
-    borderColor: '#d35647',
+    resizeMode: 'contain',
     margin: 8,
   },
 });
