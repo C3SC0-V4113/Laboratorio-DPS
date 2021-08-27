@@ -31,6 +31,30 @@ const users = [
     src: require('./src/imgs/pupusas.jpg'),
     ingredientes: ['queso', 'frijoles', 'masa de maíz', 'salsa'],
   },
+  {
+    id: 2,
+    nombre: 'Elotes Locos',
+    src: require('./src/imgs/elotes.jpg'),
+    ingredientes: ['elote', 'queso rayado', 'Ketchup', 'Mostaza', 'Mayonesa', 'Salsa Negra'],
+  },
+  {
+    id: 3,
+    nombre: 'Nuegados de Yuca',
+    src: require('./src/imgs/nuegados.jpg'),
+    ingredientes: ['Yuca Molida', 'Queso Rayado', 'Huevos', 'Polvo de Hornear'],
+  },
+  {
+    id: 4,
+    nombre: 'Tamales de Pollo',
+    src: require('./src/imgs/tamales.jpg'),
+    ingredientes: ['Pollo', 'Tomate', 'Zanahora', 'Papas', 'Masa de Maiz', 'Chiles Dulces', 'Cebolla'],
+  },
+  {
+    id: 5,
+    nombre: 'Yuca Frita/Salcochada',
+    src: require('./src/imgs/yuca.jpg'),
+    ingredientes: ['Yuca', 'Ajo', 'Tomate', 'Salsa', 'Curtido', 'Chicharrón', 'Pepescas'],
+  },
 ];
 
 const App = () => {
