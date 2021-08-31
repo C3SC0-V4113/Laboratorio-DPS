@@ -22,14 +22,6 @@ import {
   View,
 } from 'react-native';
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-
 import colors from './src/utils/colors';
 import Form from './src/components/Forms';
 import Footer from './src/components/Footer';
@@ -76,8 +68,9 @@ export default function App() {
   return (
     <>
       <StatusBar barStyle="light-content" />
-      <SafeAreaView style={styles.Header}>
-        <Text style={styles.HeadApp}>Cotizador de Prestamos</Text>
+      <SafeAreaView style={styles.safeArea}>
+        <View style={styles.background} />
+        <Text style={styles.titleApp}>Cotizador de Prestamos</Text>
         <Form
           setCapital={setCapital}
           setInterest={setInterest}
@@ -91,7 +84,7 @@ export default function App() {
         total={total}
         errorMessage={errorMessage}
       />
-      <Footer></Footer>
+      <Footer calculate={calculate}></Footer>
     </>
   );
 }
@@ -104,6 +97,25 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   HeadApp: {
+    fontSize: 25,
+    fontWeight: 'bold',
+    color: '#fff',
+    marginTop: 15,
+  },
+  safeArea: {
+    height: 240,
+    alignItems: 'center',
+  },
+  background: {
+    backgroundColor: colors.PRIMARY_COLOR,
+    height: 250,
+    width: '100%',
+    borderBottomLeftRadius: 30,
+    borderBottomRightRadius: 30,
+    position: 'absolute',
+    zIndex: -1,
+  },
+  titleApp: {
     fontSize: 25,
     fontWeight: 'bold',
     color: '#fff',

@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
     marginRight: 5,
     marginLeft: -5,
     marginBottom: 10,
-    color: '#000',
+    color: 'black',
     paddingHorizontal: 20,
   },
   inputPercentage: {
