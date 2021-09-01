@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
     marginLeft: 5,
   },
 });
-const picketSelectStyles = StyleSheet.create({
+const picketSelectStimpoyles = StyleSheet.create({
   inputIOS: {
     fontSize: 16,
     paddingVertical: 12,
