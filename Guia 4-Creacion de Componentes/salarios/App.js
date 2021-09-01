@@ -22,6 +22,7 @@ import {
   useColorScheme,
   View,
 } from 'react-native';
+import Result from './src/components/Result';
 
 import Form from './src/components/Form';
 
@@ -70,7 +71,12 @@ export default function App(){
       setNombre={setNombre}
       setSalario={setSalario}
       />
-      <View><Text>Resultados de la App</Text></View>
+      <Result
+      nombre={nombre}
+      neto={neto}
+      total={total}
+      errorMessage={errorMessage}
+      />
       <View><Text>Footer de la App</Text></View>
     </SafeAreaView>
     </>
