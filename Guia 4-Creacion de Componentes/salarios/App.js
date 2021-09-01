@@ -23,7 +23,7 @@ import {
   View,
 } from 'react-native';
 import Result from './src/components/Result';
-
+import Footer from './src/components/Footer';
 import Form from './src/components/Form';
 
 export default function App(){
@@ -77,7 +77,7 @@ export default function App(){
       total={total}
       errorMessage={errorMessage}
       />
-      <View><Text>Footer de la App</Text></View>
+      <Footer calculate={calculate}></Footer>
     </SafeAreaView>
     </>
   );
