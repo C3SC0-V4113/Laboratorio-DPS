@@ -122,7 +122,7 @@ const App = () => {
 };
 const styles = StyleSheet.create({
   contenedor: {
-    backgroundColor: Colors.PRIMARY_COLOR,
+    backgroundColor: colors.PRIMARY_COLOR,
     flex: 1
   },
   titulo: {
@@ -142,7 +142,7 @@ const styles = StyleSheet.create({
   },
   btnMostrarForm: {
     padding: 10,
-    backgroundColor: Colors.BUTTON_COLOR,
+    backgroundColor: colors.BUTTON_COLOR,
     marginVertical: 10
   },
   textoMostrarForm: {

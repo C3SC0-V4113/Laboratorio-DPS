@@ -4,7 +4,8 @@ import {
 } from 'react-native';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import shortid from 'shortid';
-import colors from '../src/utils/colors';
+import colors from '../utils/colors';
+
 const Formulario = ({ citas, setCitas, guardarMostrarForm, guardarCitasStorage }) => {
     //variables para el formulario
     const [paciente, guardarPaciente] = useState('');
@@ -166,6 +167,7 @@ const styles = StyleSheet.create({
         marginTop: 20
     },
     input: {
+        color: "black",
         marginTop: 10,
         height: 50,
         borderColor: '#e1e1e1',

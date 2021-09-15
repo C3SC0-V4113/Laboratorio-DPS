@@ -14,7 +14,8 @@
     "@react-native-community/datetimepicker": "^3.5.2",
     "react": "17.0.2",
     "react-native": "0.65.1",
-    "react-native-modal-datetime-picker": "^11.0.0"
+    "react-native-modal-datetime-picker": "^11.0.0",
+    "shortid": "^2.2.16"
   },
   "devDependencies": {
     "@babel/core": "7.15.5",
