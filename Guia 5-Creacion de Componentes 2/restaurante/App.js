@@ -11,107 +11,115 @@
 //expo start --clear
 //keytool -genkey -v -keystore my-upload-key.keystore -alias my-key-alias -keyalg RSA -keysize 2048 -validity 10000
 
-import React from 'react';
-import type {Node} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   SafeAreaView,
   ScrollView,
   StatusBar,
   StyleSheet,
   Text,
+  TouchableHighlight,
+  FlatList,
+  TouchableWithoutFeedback,
+  Keyboard,
+  Platform,
   useColorScheme,
   View,
 } from 'react-native';
+import {AsyncStorageStatic} from 'react-native';
+import Reservacion from './src/components/Reservacion'
+import Formulario from './src/components/Formulario';
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+const App=()=>{
+  //definir el state de las reservaciones
+  const [reservaciones,setReservaciones]=useState([]);
+  const [mostrarform,guardarMostrarForm]=useState(false);
 
-const Section = ({children, title}): Node => {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  );
-};
+  useEffect(()=>{
+    const obtenerReservacionesStorage=async()=>{
+      try {
+        const reservacionesStorage=await AsyncStorageStatic.getItem('reservaciones');
+        if (reservacionesStorage) {
+          setReservaciones(JSON.parse(reservacionesStorage));
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    obtenerReservacionesStorage();
+  },[]);
 
-const App: () => Node = () => {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
+  //Eliminar los clientes del state
+  const eliminarCliente=id=>{
+    const reservasFiltradas=reservaciones.filter(reserva=>reserva.id!==id);
+    setReservaciones(reservasFiltradas);
+    guardarReservacionesStorage(JSON.stringify(citasFiltradas));
   };
 
-  return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.js</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
-  );
-};
+  //Muestra u oculta el Formulario
+  const mostrarFormulario=()=>{
+    guardarMostrarForm(!mostrarform);
+  };
 
-const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-});
+  //Ocultar el teclado
+  const cerrarTeclado=()=>{
+    Keyboard.dismiss();
+  };
+
+  //Almacenar las resrvaciones en storage
+  guardarReservacionesStorage=async reservaJSON=>{
+    try {
+      await AsyncStorageStatic.setItem('reservaciones',reservaJSON);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  return(
+    <TouchableWithoutFeedback onPress={()=>cerrarTeclado}>
+      <View>
+        <Text>Administrador de Reservaciones</Text>
+        <View>
+          <TouchableHighlight
+            onPress={()=>mostrarFormulario()}
+          >
+            <Text>
+              {' '}
+              {mostrarform ? 'Cancelar Crear Reservación':'Crear Nueva Reservacion'}{' '}
+            </Text>
+          </TouchableHighlight>
+        </View>
+        <View>
+          {
+            mostrarform ? (
+              <>
+                <Text>Crear Nueva Reservación</Text>
+                <Formulario/>
+              </>
+            ):(
+              <>
+                <Text>
+                  {' '}
+                  {
+                    reservaciones.length>0
+                    ? 'Administra tus reservaciones'
+                    : 'No hay Reservaciones, agrega una'
+                  }
+                  {' '}
+                </Text>
+                <FlatList
+                data={reservaciones}
+                renderItem={({item})=>(
+                  <Reservacion/>
+                )}
+                keyExtractor={cita=>cita.id}
+                />
+              </>
+            )
+          }
+        </View>
+      </View>
+    </TouchableWithoutFeedback>
+  )
+};
 
 export default App;
