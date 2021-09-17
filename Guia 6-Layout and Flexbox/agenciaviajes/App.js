@@ -1,53 +1,71 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
-
-// npx react-native run-android
-// npx @react-native-community/cli doctor
-//expo start --clear
-//keytool -genkey -v -keystore my-upload-key.keystore -alias my-key-alias -keyalg RSA -keysize 2048 -validity 10000
-
 import React from 'react';
-import {View, StyleSheet} from 'react-native';
-const App = () => {
-  return (
-    <>
-      <View style={styles.contenedor}>
-        <View style={styles.caja1}></View>
-        <View style={styles.caja2}></View>
-        <View style={styles.caja3}></View>
-        <View style={styles.caja4}></View>
-      </View>
-    </>
-  );
+import {View, StyleSheet,Image,Text,ScrollView} from 'react-native';
+const App = () =>{
+ return(
+ <>
+<View >
+ <View style={{flexDirection:'row'}} >
+ <Image
+ style={styles.banner}
+ source={require('./src/img/bg.jpg')} />
+ </View>
+</View>
+
+<View style={styles.contenedor}>
+  <Text style={styles.titulo}>Que hacer en El Salvador</Text>
+  <ScrollView horizontal>
+    <View>
+      <Image
+        style={styles.ciudad}
+        source={require('./src/img/actividad-1.jpg')}
+      />
+    </View>
+    <View>
+      <Image
+        style={styles.ciudad}
+        source={require('./src/img/actividad-2.jpg')}
+      />
+    </View>
+    <View>
+      <Image
+        style={styles.ciudad}
+        source={require('./src/img/actividad-3.jpg')}
+      />
+    </View>
+    <View>
+      <Image
+        style={styles.ciudad}
+        source={require('./src/img/actividad-4.jpg')}
+      />
+    </View>
+    <View>
+      <Image
+        style={styles.ciudad}
+        source={require('./src/img/actividad-5.jpg')}
+      />
+    </View>
+  </ScrollView>
+</View>
+</>
+ );
 };
 const styles = StyleSheet.create({
-  contenedor: {
-    backgroundColor: 'cornflowerblue',
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignItems:'flex-end'
-  },
-  caja1: {
-    padding: 20,
-    backgroundColor: 'navy',
-  },
-  caja2: {
-    padding: 20,
-    backgroundColor: 'yellow',
-  },
-  caja3: {
-    padding: 20,
-    backgroundColor: 'green',
-  },
-  caja4: {
-    padding: 20,
-    backgroundColor: 'teal',
-  },
+banner:{
+ height:250,
+ flex:1
+},
+titulo:{
+  fontWeight: 'bold',
+  fontSize:24,
+  marginVertical:10
+},
+contenedor:{
+  marginHorizontal:10,
+},
+ciudad:{
+  width:250,
+  height:300,
+  marginRight:10
+}
 });
 export default App;
