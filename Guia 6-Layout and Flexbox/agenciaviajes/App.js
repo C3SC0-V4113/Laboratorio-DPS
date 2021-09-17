@@ -11,6 +11,8 @@ import {
 } from 'react-native';
 const App = () => {
   const [modalVisibleplaya, setModalVisibleplaya] = useState(false);
+  const [modalVisiblepupusas, setModalVisiblepupusas] = useState(false);
+  const [modalVisibleFlores, setModalVisibleFlores] = useState(false);
   return (
     <>
       <ScrollView>
@@ -81,13 +83,37 @@ const App = () => {
           </ScrollView>
         </View>
 
+        <Modal
+          transparent={true}
+          animationType="slide"
+          visible={modalVisiblepupusas}
+          onRequestClose={() => {
+            alert('Modal ha sido cerrado.');
+          }}>
+          <View style={styles.vistaModal}>
+            <View style={styles.Modal}>
+              <Text style={styles.subtitulo}>Comer Pupusas</Text>
+              <Text>La delicia culinaria de unas pupusas</Text>
+              <Button
+                title="Cerrar"
+                onPress={() => {
+                  setModalVisiblepupusas(!modalVisiblepupusas);
+                }}></Button>
+            </View>
+          </View>
+        </Modal>
         <Text style={styles.titulo}>Platillos Salvadoreños</Text>
         <View>
           <View>
-            <Image
-              style={styles.mejores}
-              source={require('./src/img/mejores-1.jpg')}
-            />
+            <TouchableHighlight
+              onPress={() => {
+                setModalVisiblepupusas(!modalVisiblepupusas);
+              }}>
+              <Image
+                style={styles.mejores}
+                source={require('./src/img/mejores-1.jpg')}
+              />
+            </TouchableHighlight>
           </View>
           <View>
             <Image
@@ -103,13 +129,40 @@ const App = () => {
           </View>
         </View>
 
+        <Modal
+          transparent={true}
+          animationType="slide"
+          visible={modalVisibleFlores}
+          onRequestClose={() => {
+            alert('Modal ha sido cerrado.');
+          }}>
+          <View style={styles.vistaModal}>
+            <View style={styles.Modal}>
+              <Text style={styles.subtitulo}>Visitar Sitios Turisticos</Text>
+              <Text>
+                Los Perfectos sitios turisticos para una larga estadia
+              </Text>
+              <Button
+                title="Cerrar"
+                onPress={() => {
+                  setModalVisibleFlores(!modalVisibleFlores);
+                }}></Button>
+            </View>
+          </View>
+        </Modal>
+
         <Text style={styles.titulo}>Rutas Turisticas</Text>
         <View style={styles.listado}>
           <View style={styles.listadoItem}>
-            <Image
-              style={styles.mejores}
-              source={require('./src/img/ruta-1.jpg')}
-            />
+            <TouchableHighlight
+              onPress={() => {
+                setModalVisibleFlores(!modalVisibleFlores);
+              }}>
+              <Image
+                style={styles.mejores}
+                source={require('./src/img/ruta-1.jpg')}
+              />
+            </TouchableHighlight>
           </View>
           <View style={styles.listadoItem}>
             <Image
