@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import {
-  Text,
   StyleSheet,
   View,
   TextInput,
@@ -8,37 +7,40 @@ import {
   TouchableHighlight,
   Alert,
   ScrollView,
+  TextComponent,
 } from 'react-native';
+import {DefaultTheme,RadioButton,Text} from 'react-native-paper';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import shortid from 'shortid';
 import colors from '../utils/colors';
 
 const Formulario = ({
-  citas,
-  setCitas,
+  reservaciones,
+  setReservaciones,
   guardarMostrarForm,
-  guardarCitasStorage,
+  guardarReservacionesStorage,
 }) => {
   //variables para el formulario
-  const [paciente, guardarPaciente] = useState('');
-  const [propietario, guardarPropietario] = useState('');
-  const [telefono, guardarTelefono] = useState('');
+  const [cliente, guardarCliente] = useState('');
   const [fecha, guardarFecha] = useState('');
   const [hora, guardarHora] = useState('');
-  const [sintomas, guardarSintomas] = useState('');
+  const [clase, guardarClase] = useState('No Fumadores');
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [isTimePickerVisible, setTimePickerVisibility] = useState(false);
   const showDatePicker = () => {
     setDatePickerVisibility(true);
   };
+
   const hideDatePicker = () => {
     setDatePickerVisibility(false);
   };
+
   const confirmarFecha = date => {
     const opciones = {year: 'numeric', month: 'long', day: '2-digit'};
     guardarFecha(date.toLocaleDateString('es-ES', opciones));
     hideDatePicker();
   };
+
   // Muestra u oculta el Time Picker
   const showTimePicker = () => {
     setTimePickerVisibility(true);
@@ -51,40 +53,38 @@ const Formulario = ({
     guardarHora(hora.toLocaleString('es-ES', opciones));
     hideTimePicker();
   };
+
   // Crear nueva cita
-  const crearNuevaCita = () => {
+  const crearNuevaReservacion = () => {
     // Validar
     if (
-      paciente.trim() === '' ||
-      propietario.trim() === '' ||
-      telefono.trim() === '' ||
+      cliente.trim() === '' ||
       fecha.trim() === '' ||
       hora.trim() === '' ||
-      sintomas.trim() === ''
+      clase.trim() === ''
     ) {
       // Falla la validación
       mostrarAlerta();
       return;
     }
     // Crear una nueva cita
-    const cita = {paciente, propietario, telefono, fecha, hora, sintomas};
-    cita.id = shortid.generate();
+    const reserva = {cliente, fecha, hora, clase};
+    reserva.id = shortid.generate();
     // console.log(cita);
     // Agregar al state
-    const citasNuevo = [...citas, cita];
-    setCitas(citasNuevo);
-    // Pasar las nuevas citas a storage
-    guardarCitasStorage(JSON.stringify(citasNuevo));
+    const reservasNuevo = [...reservaciones, reserva];
+    setReservaciones(reservasNuevo);
+    // Pasar las nuevas reservaciones a storage
+    guardarReservacionesStorage(JSON.stringify(reservasNuevo));
     // Ocultar el formulario
     guardarMostrarForm(false);
     // Resetear el formulario
-    guardarSintomas('');
-    guardarPropietario('');
-    guardarPaciente('');
+    guardarClase('');
+    guardarCliente('');
     guardarHora('');
     guardarFecha('');
-    guardarTelefono('');
   };
+
   // Muestra la alerta si falla la validación
   const mostrarAlerta = () => {
     Alert.alert(
@@ -101,25 +101,10 @@ const Formulario = ({
     <>
       <ScrollView style={styles.formulario}>
         <View>
-          <Text style={styles.label}>Paciente:</Text>
+          <Text style={styles.label}>Nombre:</Text>
           <TextInput
             style={styles.input}
-            onChangeText={texto => guardarPaciente(texto)}
-          />
-        </View>
-        <View>
-          <Text style={styles.label}>Dueño:</Text>
-          <TextInput
-            style={styles.input}
-            onChangeText={texto => guardarPropietario(texto)}
-          />
-        </View>
-        <View>
-          <Text style={styles.label}>Teléfono Contacto:</Text>
-          <TextInput
-            style={styles.input}
-            onChangeText={texto => guardarTelefono(texto)}
-            keyboardType="numeric"
+            onChangeText={texto => guardarCliente(texto)}
           />
         </View>
         <View>
@@ -154,17 +139,22 @@ const Formulario = ({
         </View>
         <View>
           <Text style={styles.label}>Síntomas:</Text>
-          <TextInput
-            multiline
-            style={styles.input}
-            onChangeText={texto => guardarSintomas(texto)}
-          />
+          <RadioButton.Group onValueChange={nuevoReserv=>guardarClase(nuevoReserv)} value={clase}>
+            <View style={styles.row}>
+              <RadioButton value="No Fumadores"/>
+              <Text style={styles.radTexto}>No Fumadores</Text>
+            </View>
+            <View style={styles.row}>
+              <RadioButton value="Fumadores"/>
+              <Text style={styles.radTexto}>Fumadores</Text>
+            </View>
+          </RadioButton.Group>
         </View>
         <View>
           <TouchableHighlight
-            onPress={() => crearNuevaCita()}
+            onPress={() => crearNuevaReservacion()}
             style={styles.btnSubmit}>
-            <Text style={styles.textoSubmit}>Crear Nueva Cita</Text>
+            <Text style={styles.textoSubmit}>Crear Nueva Reserva</Text>
           </TouchableHighlight>
         </View>
       </ScrollView>
@@ -201,5 +191,13 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
   },
+  row:{
+    flexDirection: "row"
+  },
+  radTexto:{
+    marginTop:8,
+    flex:1,
+    alignItems:"center"
+  }
 });
 export default Formulario;

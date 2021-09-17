@@ -16,26 +16,26 @@ import {
   Header,
   LearnMoreLinks,
   ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+} from 'react-native/Librarie{´ps/NewAppScreen';
 
-const Reservacion = ({item, eliminarPaciente}) => {
+const Reservacion = ({item, eliminarReserva}) => {
   const dialogoEliminar = id => {
     console.log('eliminando....', id);
-    eliminarPaciente(id);
+    eliminarReserva(id);
   };
   return (
     <View style={styles.cita}>
       <View>
-        <Text style={styles.label}>Paciente: </Text>
-        <Text style={styles.texto}>{item.paciente}</Text>
+        <Text style={styles.label}>Nombre: </Text>
+        <Text style={styles.texto}>{item.cliente}</Text>
       </View>
       <View>
-        <Text style={styles.label}>Propietario: </Text>
-        <Text style={styles.texto}>{item.propietario}</Text>
+        <Text style={styles.label}>Clase: </Text>
+        <Text style={styles.texto}>{item.clase}</Text>
       </View>
       <View>
-        <Text style={styles.label}>Síntomas: </Text>
-        <Text style={styles.texto}>{item.sintomas}</Text>
+        <Text style={styles.label}>Fecha: </Text>
+        <Text style={styles.texto}>{item.hora}</Text>
       </View>
       <View>
         <TouchableHighlight
