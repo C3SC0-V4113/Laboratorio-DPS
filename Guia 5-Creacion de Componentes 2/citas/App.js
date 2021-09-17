@@ -11,8 +11,7 @@
 //expo start --clear
 //keytool -genkey -v -keystore my-upload-key.keystore -alias my-key-alias -keyalg RSA -keysize 2048 -validity 10000
 
-
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -30,9 +29,8 @@ import {
 
 import Cita from './src/components/Cita';
 import Formulario from './src/components/Formulario';
-import { AsyncStorageStatic } from 'react-native';
+import {AsyncStorageStatic} from 'react-native';
 import colors from './src/utils/colors';
-
 
 import {
   Colors,
@@ -51,12 +49,12 @@ const App = () => {
       try {
         const citasStorage = await AsyncStorage.getItem('citas');
         if (citasStorage) {
-          setCitas(JSON.parse(citasStorage))
+          setCitas(JSON.parse(citasStorage));
         }
       } catch (error) {
         console.log(error);
       }
-    }
+    };
     obtenerCitasStorage();
   }, []);
   // Elimina los pacientes del state
@@ -64,31 +62,35 @@ const App = () => {
     const citasFiltradas = citas.filter(cita => cita.id !== id);
     setCitas(citasFiltradas);
     guardarCitasStorage(JSON.stringify(citasFiltradas));
-  }
+  };
   // Muestra u oculta el Formulario
   const mostrarFormulario = () => {
     guardarMostrarForm(!mostrarform);
-  }
+  };
   // Ocultar el teclado
   const cerrarTeclado = () => {
     Keyboard.dismiss();
-  }
+  };
   // Almacenar las citas en storage
-  const guardarCitasStorage = async (citasJSON) => {
+  const guardarCitasStorage = async citasJSON => {
     try {
       await AsyncStorage.setItem('citas', citasJSON);
     } catch (error) {
       console.log(error);
     }
-  }
+  };
   return (
     <TouchableWithoutFeedback onPress={() => cerrarTeclado()}>
       <View style={styles.contenedor}>
         <Text style={styles.titulo}>Administrador de Citas</Text>
         <View>
-          <TouchableHighlight onPress={() => mostrarFormulario()}
+          <TouchableHighlight
+            onPress={() => mostrarFormulario()}
             style={styles.btnMostrarForm}>
-            <Text style={styles.textoMostrarForm}> {mostrarform ? 'Cancelar Crear Cita' : 'Crear Nueva Cita'} </Text>
+            <Text style={styles.textoMostrarForm}>
+              {' '}
+              {mostrarform ? 'Cancelar Crear Cita' : 'Crear Nueva Cita'}{' '}
+            </Text>
           </TouchableHighlight>
         </View>
         <View style={styles.contenido}>
@@ -104,13 +106,18 @@ const App = () => {
             </>
           ) : (
             <>
-              <Text style={styles.titulo}> {citas.length > 0 ? 'Administra tus citas' :
-                'No hay citas, agrega una'} </Text>
+              <Text style={styles.titulo}>
+                {' '}
+                {citas.length > 0
+                  ? 'Administra tus citas'
+                  : 'No hay citas, agrega una'}{' '}
+              </Text>
               <FlatList
                 style={styles.listado}
                 data={citas}
-                renderItem={({ item }) => <Cita item={item}
-                  eliminarPaciente={eliminarPaciente} />}
+                renderItem={({item}) => (
+                  <Cita item={item} eliminarPaciente={eliminarPaciente} />
+                )}
                 keyExtractor={cita => cita.id}
               />
             </>
@@ -123,7 +130,7 @@ const App = () => {
 const styles = StyleSheet.create({
   contenedor: {
     backgroundColor: colors.PRIMARY_COLOR,
-    flex: 1
+    flex: 1,
   },
   titulo: {
     color: '#FFF',
@@ -131,7 +138,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     fontSize: 24,
     fontWeight: 'bold',
-    textAlign: 'center'
+    textAlign: 'center',
   },
   contenido: {
     flex: 1,
@@ -143,12 +150,12 @@ const styles = StyleSheet.create({
   btnMostrarForm: {
     padding: 10,
     backgroundColor: colors.BUTTON_COLOR,
-    marginVertical: 10
+    marginVertical: 10,
   },
   textoMostrarForm: {
     color: '#FFF',
     fontWeight: 'bold',
-    textAlign: 'center'
-  }
+    textAlign: 'center',
+  },
 });
 export default App;

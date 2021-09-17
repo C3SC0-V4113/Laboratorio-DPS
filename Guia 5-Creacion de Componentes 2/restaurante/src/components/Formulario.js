@@ -9,7 +9,7 @@ import {
   ScrollView,
   TextComponent,
 } from 'react-native';
-import {DefaultTheme,RadioButton,Text} from 'react-native-paper';
+import {DefaultTheme, RadioButton, Text} from 'react-native-paper';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import shortid from 'shortid';
 import colors from '../utils/colors';
@@ -139,13 +139,15 @@ const Formulario = ({
         </View>
         <View>
           <Text style={styles.label}>Síntomas:</Text>
-          <RadioButton.Group onValueChange={nuevoReserv=>guardarClase(nuevoReserv)} value={clase}>
+          <RadioButton.Group
+            onValueChange={nuevoReserv => guardarClase(nuevoReserv)}
+            value={clase}>
             <View style={styles.row}>
-              <RadioButton value="No Fumadores"/>
+              <RadioButton value="No Fumadores" />
               <Text style={styles.radTexto}>No Fumadores</Text>
             </View>
             <View style={styles.row}>
-              <RadioButton value="Fumadores"/>
+              <RadioButton value="Fumadores" />
               <Text style={styles.radTexto}>Fumadores</Text>
             </View>
           </RadioButton.Group>
@@ -191,13 +193,13 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
   },
-  row:{
-    flexDirection: "row"
+  row: {
+    flexDirection: 'row',
   },
-  radTexto:{
-    marginTop:8,
-    flex:1,
-    alignItems:"center"
-  }
+  radTexto: {
+    marginTop: 8,
+    flex: 1,
+    alignItems: 'center',
+  },
 });
 export default Formulario;

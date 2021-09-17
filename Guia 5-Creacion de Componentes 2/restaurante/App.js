@@ -40,7 +40,7 @@ const App = () => {
     const obtenerReservacionesStorage = async () => {
       try {
         const reservacionesStorage = await AsyncStorageStatic.getItem(
-          'reservaciones'
+          'reservaciones',
         );
         if (reservacionesStorage) {
           setReservaciones(JSON.parse(reservacionesStorage));
@@ -72,7 +72,7 @@ const App = () => {
   };
 
   //Almacenar las resrvaciones en storage
-  guardarReservacionesStorage = async (reservaJSON) => {
+  guardarReservacionesStorage = async reservaJSON => {
     try {
       await AsyncStorageStatic.setItem('reservaciones', reservaJSON);
     } catch (error) {
@@ -99,11 +99,11 @@ const App = () => {
             <>
               <Text style={styles.titulo}>Crear Nueva Reservación</Text>
               <Formulario
-              reservaciones={reservaciones}
-              setReservaciones={setReservaciones}
-              guardarMostrarForm={guardarMostrarForm}
-              guardarReservacionesStorage={guardarReservacionesStorage}
-               />
+                reservaciones={reservaciones}
+                setReservaciones={setReservaciones}
+                guardarMostrarForm={guardarMostrarForm}
+                guardarReservacionesStorage={guardarReservacionesStorage}
+              />
             </>
           ) : (
             <>
@@ -116,7 +116,9 @@ const App = () => {
               <FlatList
                 style={styles.listado}
                 data={reservaciones}
-                renderItem={({item}) => <Reservacion item={item} eliminarReserva={eliminarCliente}/>}
+                renderItem={({item}) => (
+                  <Reservacion item={item} eliminarReserva={eliminarCliente} />
+                )}
                 keyExtractor={reservacion => reservacion.id}
               />
             </>
