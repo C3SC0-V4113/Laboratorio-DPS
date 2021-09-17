@@ -11,6 +11,8 @@ import {
 } from 'react-native';
 const App = () => {
   const [modalVisibleplaya, setModalVisibleplaya] = useState(false);
+  const [modalVisibleMonta, setmodalVisibleMonta] = useState(false);
+  const [modalVisibleCity, setmodalVisibleCity] = useState(false);
   return (
     <>
       <ScrollView>
@@ -25,7 +27,7 @@ const App = () => {
             <View style={styles.Modal}>
               <Text style={styles.subtitulo}>Ir a la playa</Text>
               <Text>
-                El Salvador cuenta con hermosas playas a niver Centroaméricano
+                Hermosos Hoteles con habitaciones de 1 a 2 camas con vista al mar y restaurantes lujosos
               </Text>
               <Button
                 title="Cerrar"
@@ -73,6 +75,134 @@ const App = () => {
                 <Image
                   style={styles.ciudad}
                   source={require('./src/img/hab-3.jpg')}
+                />
+              </TouchableHighlight>
+            </View>
+          </ScrollView>
+        </View>
+
+
+
+        <Modal
+          transparent={true}
+          animationType="slide"
+          visible={modalVisibleMonta}
+          onRequestClose={() => {
+            alert('Modal ha sido cerrado.');
+          }}>
+          <View style={styles.vistaModal}>
+            <View style={styles.Modal}>
+              <Text style={styles.subtitulo}>Ir a la montaña</Text>
+              <Text>
+                Sitios reconfortantes con increibles vistas y alta privacidad
+              </Text>
+              <Button
+                title="Cerrar"
+                onPress={() => {
+                  setmodalVisibleMonta(!modalVisibleMonta);
+                }}></Button>
+            </View>
+          </View>
+        </Modal>
+
+        <View style={styles.contenedor}>
+          <Text style={styles.titulo}>Hoteles de Montaña</Text>
+          <ScrollView horizontal>
+            <View>
+              <TouchableHighlight
+                onPress={() => {
+                  setmodalVisibleMonta(!modalVisibleMonta);
+                }}>
+                <Image
+                  style={styles.ciudad}
+                  source={require('./src/img/hab-4.jpg')}
+                />
+              </TouchableHighlight>
+            </View>
+            <View>
+              <TouchableHighlight
+                onPress={() => {
+                  setmodalVisibleMonta(!modalVisibleMonta);
+                }}>
+                <Image
+                  style={styles.ciudad}
+                  source={require('./src/img/hab-5.jpg')}
+                />
+              </TouchableHighlight>
+            </View>
+            <View>
+              <TouchableHighlight
+                onPress={() => {
+                  setmodalVisibleMonta(!modalVisibleMonta);
+                }}>
+                <Image
+                  style={styles.ciudad}
+                  source={require('./src/img/hab-6.jpg')}
+                />
+              </TouchableHighlight>
+            </View>
+          </ScrollView>
+        </View>
+
+
+
+
+
+        <Modal
+          transparent={true}
+          animationType="slide"
+          visible={modalVisibleCity}
+          onRequestClose={() => {
+            alert('Modal ha sido cerrado.');
+          }}>
+          <View style={styles.vistaModal}>
+            <View style={styles.Modal}>
+              <Text style={styles.subtitulo}>Ir a la ciudad</Text>
+              <Text>
+                Hoteles cercanos a todo lo que necesitas, en medio de una ciudad, pero aislados para eliminar cualquier molestia externa
+              </Text>
+              <Button
+                title="Cerrar"
+                onPress={() => {
+                  setmodalVisibleCity(!modalVisibleCity);
+                }}></Button>
+            </View>
+          </View>
+        </Modal>
+
+        <View style={styles.contenedor}>
+          <Text style={styles.titulo}>Hoteles de Ciudad</Text>
+          <ScrollView horizontal>
+            <View>
+              <TouchableHighlight
+                onPress={() => {
+                  setmodalVisibleCity(!modalVisibleCity);
+                }}>
+                <Image
+                  style={styles.ciudad}
+                  source={require('./src/img/hab-7.jpg')}
+                />
+              </TouchableHighlight>
+            </View>
+            <View>
+              <TouchableHighlight
+                onPress={() => {
+                  setmodalVisibleCity(!modalVisibleCity);
+                }}>
+                <Image
+                  style={styles.ciudad}
+                  source={require('./src/img/hab-8.jpg')}
+                />
+              </TouchableHighlight>
+            </View>
+            <View>
+              <TouchableHighlight
+                onPress={() => {
+                  setmodalVisibleCity(!modalVisibleCity);
+                }}>
+                <Image
+                  style={styles.ciudad}
+                  source={require('./src/img/hab-9.jpg')}
                 />
               </TouchableHighlight>
             </View>
