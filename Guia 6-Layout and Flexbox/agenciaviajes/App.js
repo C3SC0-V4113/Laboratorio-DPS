@@ -9,6 +9,12 @@ import {
   Button,
   TouchableHighlight,
 } from 'react-native';
+
+// npx react-native run-android
+// npx @react-native-community/cli doctor
+//expo start --clear
+//keytool -genkey -v -keystore my-upload-key.keystore -alias my-key-alias -keyalg RSA -keysize 2048 -validity 10000
+
 const App = () => {
   const [modalVisibleplaya, setModalVisibleplaya] = useState(false);
   const [modalVisiblepupusas, setModalVisiblepupusas] = useState(false);
