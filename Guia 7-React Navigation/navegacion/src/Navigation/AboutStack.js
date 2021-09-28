@@ -6,7 +6,7 @@ const Stack = createStackNavigator();
 export default function AboutStack() {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="about" component={About} options={{title: 'About'}} />
+      <Stack.Screen name="about-stack" component={About} options={{title: 'About'}} />
     </Stack.Navigator>
   );
 }

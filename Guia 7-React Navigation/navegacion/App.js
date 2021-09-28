@@ -10,7 +10,6 @@
 // npx @react-native-community/cli doctor
 //expo start --clear
 //keytool -genkey -v -keystore my-upload-key.keystore -alias my-key-alias -keyalg RSA -keysize 2048 -validity 10000
-
 import * as React from 'react';
 import {View, Text, SafeAreaView} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';

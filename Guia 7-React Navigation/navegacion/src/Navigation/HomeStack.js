@@ -5,7 +5,7 @@ const Stack = createStackNavigator();
 export default function HomeStack() {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="home" component={Home} options={{title: 'Home'}} />
+      <Stack.Screen name="home-stack" component={Home} options={{title: 'Home'}} />
     </Stack.Navigator>
   );
 }
