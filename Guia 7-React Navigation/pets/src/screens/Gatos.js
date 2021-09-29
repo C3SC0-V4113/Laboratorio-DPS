@@ -1,15 +1,27 @@
 import React from 'react';
-import {View, Text, Button} from 'react-native';
+import {View, Text} from 'react-native';
 import Lista from '../Components/lista';
-export default function Gato(props) {
-  const {navigation} = props;
+
+const gatos=[
+    {
+      name: 'Amy Farmau',
+      avatar_url:
+        'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
+      subtitle: 'Vice Cat',
+    },
+    {
+      name: 'Chris Miauckson',
+      avatar_url:
+        'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
+      subtitle: 'Vice Chairman',
+    },
+  ];
+
+export default function Gato() {
   return (
     <View>
       <Text>Estamos en Gato!</Text>
-      <Lista></Lista>
-      <Button
-        title="Ir a Perros"
-        onPress={() => navigation.navigate('perro')}></Button>
+      <Lista list={gatos}/>
     </View>
   );
 }
