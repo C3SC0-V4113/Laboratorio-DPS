@@ -6,31 +6,45 @@ import {
   StyleSheet,
   TouchableWithoutFeedback,
   Animated,
+  Alert,
 } from 'react-native';
 import {Picker} from '@react-native-community/picker';
 
-const Formulario = (busqueda,guardaBusqueda) => {
-    const {pais}=busqueda;
-    const [animacionboton]=useState(new Animated.Value(1));
+const Formulario = (busqueda, guardaBusqueda) => {
+  const {pais} = busqueda;
+  const [animacionboton] = useState(new Animated.Value(1));
 
-    const animacionEntrada=()=>{
-        Animated.spring(animacionboton,{
-            toValue:.9,
-            useNativeDriver: true,
-        }).start();
+  const consultarPais = () => {
+    if (pais.trim() === '') {
+      mostrarAlerta();
+      return;
     }
+  };
 
-    const animacionSalida=()=>{
-        Animated.spring(animacionboton,{
-            toValue:1
-        }).start();
-    }
+  const mostrarAlerta = () => {
+    Alert.alert('Error', 'Debe seleccionar un país'), [{Text: 'Entendido'}];
+  };
 
-    const estiloAnimacion={
-        transform:[{
-            scale: animacionboton
-        }]
-    }
+  const animacionEntrada = () => {
+    Animated.spring(animacionboton, {
+      toValue: 0.9,
+      useNativeDriver: true,
+    }).start();
+  };
+
+  const animacionSalida = () => {
+    Animated.spring(animacionboton, {
+      toValue: 1,
+    }).start();
+  };
+
+  const estiloAnimacion = {
+    transform: [
+      {
+        scale: animacionboton,
+      },
+    ],
+  };
 
   return (
     <>
@@ -39,11 +53,11 @@ const Formulario = (busqueda,guardaBusqueda) => {
           <Text style={styles.input}>Pais</Text>
         </View>
         <View>
-          <Picker 
-          selectedValue={pais}
-          onValueChange={pais=>guardaBusqueda({...busqueda,pais})}
-          style={styles.itempais}
-          >
+          <Picker
+            selectedValue={pais}
+            onValueChange={pais => guardaBusqueda({...busqueda, pais})}
+            onPress={() => consultarPais()}
+            style={styles.itempais}>
             <Picker.Item label="--seleccione un pais--" value="" />
             <Picker.Item label="Canada" value="ca" />
             <Picker.Item label="El Salvador" value="sv" />
@@ -61,10 +75,9 @@ const Formulario = (busqueda,guardaBusqueda) => {
           </Picker>
         </View>
         <TouchableWithoutFeedback
-        onPressIn={()=>animacionEntrada()}
-        onPressOut={()=>animacionSalida}
-        >
-          <Animated.View style={[styles.btnBuscar,estiloAnimacion]}>
+          onPressIn={() => animacionEntrada()}
+          onPressOut={() => animacionSalida}>
+          <Animated.View style={[styles.btnBuscar, estiloAnimacion]}>
             <Text style={styles.textoBuscar}>Buscar País</Text>
           </Animated.View>
         </TouchableWithoutFeedback>
