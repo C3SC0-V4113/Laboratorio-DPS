@@ -11,7 +11,7 @@
 //expo start --clear
 //keytool -genkey -v -keystore my-upload-key.keystore -alias my-key-alias -keyalg RSA -keysize 2048 -validity 10000
 
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -20,7 +20,10 @@ import {
   Text,
   useColorScheme,
   View,
+  Alert,
 } from 'react-native';
+
+import Pais from './src/components/Pais';
 
 import Formulario from './src/components/Formulario';
 
@@ -34,10 +37,39 @@ import {
 
 export default function App() {
   const [busqueda, guardaBusqueda] = useState({pais: ''});
+  const [consultar, guardarConsultar] = useState(false);
+  const [resultado, guardarResultado] = useState({});
+  useEffect(() => {
+    const {pais} = busqueda;
+    const consultarPais = async () => {
+      if (consultar) {
+        const url = `https://servicodados.ibge.gov.br/api/v1/paises/${pais}`;
+        try {
+          const respuesta = await fetch(url);
+          const resultado = await respuesta.json();
+          guardarResultado(resultado);
+          guardarConsultar(false);
+        } catch (error) {
+          mostrarAlerta();
+        }
+      }
+    };
+    consultarPais();
+  }, [consultar]);
+  const mostrarAlerta = () => {
+    Alert.alert('Error', 'No hay resultado intenta con otra ciudad o país'),
+      [{Text: 'Ok'}];
+  };
+
   return (
     <View style={styles.app}>
       <View style={styles.contenido}>
-        <Formulario busqueda={busqueda} guardaBusqueda={guardaBusqueda} />
+        <Formulario
+          busqueda={busqueda}
+          guardaBusqueda={guardaBusqueda}
+          guardarConsultar={guardarConsultar}
+        />
+        <Pais resultado={resultado} />
       </View>
     </View>
   );
@@ -45,22 +77,11 @@ export default function App() {
 
 const styles = StyleSheet.create({
   app: {
-    backgroundColor: '#4091D8',
-    height: '100%',
-    width: '100%',
-    paddingVertical: 32,
-    paddingHorizontal: 24,
+    flex: 1,
+    backgroundColor: 'rgb(71,149,212)',
+    justifyContent: 'center',
   },
   contenido: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
+    margin: '2.5%',
   },
 });
