@@ -11,19 +11,19 @@ import {
 import {Picker} from '@react-native-community/picker';
 
 const Formulario = (busqueda, guardaBusqueda, guardarConsultar) => {
-  const {pais} = busqueda;
+  const {pais} = {busqueda};
   const [animacionboton] = useState(new Animated.Value(1));
 
   const consultarPais = () => {
     if (pais.trim() === '') {
-      mostrarAlerta();
+      mostrarAlertaPick();
       return;
     }
     //Consultar API
     guardarConsultar(true);
   };
 
-  const mostrarAlerta = () => {
+  const mostrarAlertaPick = () => {
     Alert.alert('Error', 'Debe seleccionar un país'), [{Text: 'Entendido'}];
   };
 
@@ -37,6 +37,7 @@ const Formulario = (busqueda, guardaBusqueda, guardarConsultar) => {
   const animacionSalida = () => {
     Animated.spring(animacionboton, {
       toValue: 1,
+      useNativeDriver: true,
     }).start();
   };
 
@@ -57,8 +58,10 @@ const Formulario = (busqueda, guardaBusqueda, guardarConsultar) => {
         <View>
           <Picker
             selectedValue={pais}
-            onValueChange={pais => guardaBusqueda({...busqueda, pais})}
-            onPress={() => consultarPais()}
+            onValueChange={pais => {
+              consultarPais();
+              guardaBusqueda({...busqueda, pais});
+            }}
             style={styles.itempais}>
             <Picker.Item label="--seleccione un pais--" value="" />
             <Picker.Item label="Canada" value="ca" />
@@ -78,7 +81,7 @@ const Formulario = (busqueda, guardaBusqueda, guardarConsultar) => {
         </View>
         <TouchableWithoutFeedback
           onPressIn={() => animacionEntrada()}
-          onPressOut={() => animacionSalida}>
+          onPressOut={() => animacionSalida()}>
           <Animated.View style={[styles.btnBuscar, estiloAnimacion]}>
             <Text style={styles.textoBuscar}>Buscar País</Text>
           </Animated.View>
