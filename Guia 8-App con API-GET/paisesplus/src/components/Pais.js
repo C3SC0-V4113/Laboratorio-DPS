@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text} from 'react-native';
+import {StyleSheet,View, Text, Image} from 'react-native';
 import {Card} from 'react-native-elements';
-const Pais = ({resultado}) => {
+const Pais = ({resultado,bandera}) => {
     console.log({resultado})
   const [info, setinfo] = useState([]);
   const [nombre, setnombre] = useState();
@@ -27,12 +27,24 @@ const Pais = ({resultado}) => {
       <Card.Title>{nombre}</Card.Title>
       <Card.Divider />
       <View style={{justifyContent: 'center'}}>
-        <Text>Capital:{capital}</Text>
-        <Text>Region:{region}</Text>
-        <Text>Lengua:{lengua.toString()}</Text>
-        <Text>Extension Territorial:{extension}</Text>
+          <Image
+          style={styles.image}
+          source={{uri: bandera}}
+          />
+        <Text>Capital: {capital}</Text>
+        <Text>Region: {region}</Text>
+        <Text>Lengua: {lengua.toString()}</Text>
+        <Text>Extension Territorial: {extension}</Text>
       </View>
     </Card>
   );
 };
 export default Pais;
+
+const styles = StyleSheet.create({
+    image:{
+        width: 50,
+        height: 50,
+        resizeMode: 'cover',
+    }
+})

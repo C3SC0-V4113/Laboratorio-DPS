@@ -29,6 +29,7 @@ export default function App() {
   const [busqueda, guardaBusqueda] = useState({pais: ''});
   const [consultar, guardarConsultar] = useState(false);
   const [resultado, guardarResultado] = useState({});
+  const [bandera, guardarBandera]=useState('https://www.countryflags.io/sv/flat/64.png');
 
   useEffect(() => {
     const {pais} = busqueda;
@@ -36,6 +37,8 @@ export default function App() {
       if (consultar) {
         console.log({pais});
         const url = `https://servicodados.ibge.gov.br/api/v1/paises/${pais}`;
+        const urlbandera=`https://www.countryflags.io/${pais}/flat/64.png`;
+        guardarBandera(urlbandera);
         try {
           const respuesta = await fetch(url);
           const resultado = await respuesta.json();
@@ -133,7 +136,7 @@ export default function App() {
             </TouchableWithoutFeedback>
           </View>
         </>
-        <Pais resultado={resultado} />
+        <Pais bandera={bandera} resultado={resultado} />
       </View>
     </View>
   );
