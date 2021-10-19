@@ -8,10 +8,10 @@ import {
 } from 'react-native';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import moment from 'moment';
-import firebase from '../utils/firebase';
+import api from '../utils/firebase';
 import 'firebase/firestore';
-firebase.firestore().settings({experimentalForceLongPolling: true});
-const db = firebase.firestore(firebase);
+api.firestore().settings({experimentalForceLongPolling: true});
+const db = api.firestore(api);
 export default function AddBirthday(props) {
   const {user, setShowList, setReloadData} = props;
   const [formData, setFormData] = useState({});

@@ -12,6 +12,8 @@ target 'birthday' do
     :hermes_enabled => false
   )
 
+  pod 'RNCAsyncStorage', :path => '../node_modules/@react-native-community/async-storage'
+
   target 'birthdayTests' do
     inherit! :complete
     # Pods for testing

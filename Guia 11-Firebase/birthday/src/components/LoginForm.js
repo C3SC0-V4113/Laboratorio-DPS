@@ -6,8 +6,8 @@ import {
   TouchableOpacity,
   TextInput,
 } from 'react-native';
-import {validateEmail} from '../utils/validations';
-import firebase from '../utils/firebase';
+import {validateEmail} from '../utils/validation';
+import api from '../utils/firebase';
 export default function LoginForm(props) {
   const {changeForm} = props;
   const [formData, setFormData] = useState(defaultValue());
@@ -20,7 +20,7 @@ export default function LoginForm(props) {
     } else if (!validateEmail(formData.email)) {
       errors.email = true;
     } else {
-      firebase
+      api
         .auth()
         .signInWithEmailAndPassword(formData.email, formData.password)
         .catch(() => {
