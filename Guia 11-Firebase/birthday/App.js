@@ -3,7 +3,7 @@ import {StyleSheet, SafeAreaView, StatusBar, LogBox} from 'react-native';
 import base64 from 'react-native-base64';
 import Auth from './src/components/Auth';
 import api from './src/utils/firebase';
-import 'firebase/auth';
+import '@react-native-firebase/auth';
 import ListBirthday from './src/components/ListBirthday';
 function btoa(data) {
   return new base64(data, 'binary').toString('base64');

@@ -9,7 +9,7 @@ import {
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import moment from 'moment';
 import api from '../utils/firebase';
-import 'firebase/firestore';
+import '@react-native-firebase/firestore';
 api.firestore().settings({experimentalForceLongPolling: true});
 const db = api.firestore(api);
 export default function AddBirthday(props) {
