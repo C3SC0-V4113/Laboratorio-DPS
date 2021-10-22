@@ -12,8 +12,9 @@ import {
   StyleSheet,
   ScrollView,
 } from 'react-native';
-import {createAppContainer, NavigationEvents} from 'react-navigation';
-import {createStackNavigator} from 'react-navigation-stack';
+//import {createAppContainer, NavigationEvents} from 'react-navigation';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 import {Input} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 class PantallaInicio extends React.Component {
@@ -27,7 +28,7 @@ class PantallaInicio extends React.Component {
   Entrar() {
     if (!!this.state.usuario && !!this.state.contrasena) {
       fetch(
-        'https://marketudb.000webhostapp.com/apiusuario.php?comando=autenticar&usuario=' +
+        'https://guia10-vc190544.000webhostapp.com/apiusuario.php?comando=autenticar&usuario=' +
           this.state.usuario +
           '&contrasena=' +
           this.state.contrasena,
@@ -137,7 +138,7 @@ class listarProductos extends React.Component {
   };
   cargarRegistros() {
     console.log('Prueba');
-    fetch('https://marketudb.000webhostapp.com/api.php?comando=listar', {
+    fetch('https://guia10-vc190544.000webhostapp.com/api.php?comando=listar', {
       method: 'GET',
     })
       .then(response => response.json())
@@ -248,7 +249,7 @@ class PaginaDetalle extends React.Component {
   };
   Actualizar() {
     fetch(
-      'https://marketudb.000webhostapp.com/api.php?comando=editar&nombre=' +
+      'https://guia10-vc190544.000webhostapp.com/api.php?comando=editar&nombre=' +
         this.state.nombre +
         '&descripcion=' +
         this.state.descripcion +
@@ -284,7 +285,7 @@ class PaginaDetalle extends React.Component {
   }
   Eliminar() {
     fetch(
-      'https://marketudb.000webhostapp.com/api.php?comando=eliminar&id=' +
+      'https://guia10-vc190544.000webhostapp.com/api.php?comando=eliminar&id=' +
         this.state.id,
       {
         method: 'GET',
@@ -455,7 +456,7 @@ class PaginaAgregar extends React.Component {
   };
   Guardar() {
     fetch(
-      'https://marketudb.000webhostapp.com/api.php?comando=agregar&nombre=' +
+      'https://guia10-vc190544.000webhostapp.com/api.php?comando=agregar&nombre=' +
         this.state.nombre +
         '&descripcion=' +
         this.state.descripcion +
@@ -546,8 +547,8 @@ class PaginaAgregar extends React.Component {
     );
   }
 }
-const RootStack = createStackNavigator(
-  {
+const Stack = createStackNavigator(
+  /*{
     Inicio: PantallaInicio,
     ListarProductos: listarProductos,
     Detalles: PaginaDetalle,
@@ -555,11 +556,20 @@ const RootStack = createStackNavigator(
   },
   {
     initialRouteName: 'Inicio',
-  },
+  },*/
 );
-const AppContainer = createAppContainer(RootStack);
+
 export default class App extends React.Component {
   render() {
-    return <AppContainer />;
+    return(
+      <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Inicio" component={PantallaInicio} />
+        <Stack.Screen name="Productos" component={listarProductos} />
+        <Stack.Screen name="Detalle" component={PaginaDetalle} />
+        <Stack.Screen name="Agregar" component={PaginaAgregar} />
+      </Stack.Navigator>
+    </NavigationContainer>
+      );
   }
 }
