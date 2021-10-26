@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React,{useState, Component} from 'react';
 import {
   SafeAreaView,
   Button,
@@ -13,11 +13,11 @@ import {
   ScrollView,
 } from 'react-native';
 //import {createAppContainer, NavigationEvents} from 'react-navigation';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import {NavigationContainer} from '@react-navigation/native';
+import {createStackNavigator} from '@react-navigation/stack';
 import {Input} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
-class PantallaInicio extends React.Component {
+class PantallaInicio extends Component {
   state = {
     usuario: '',
     contrasena: '',
@@ -27,22 +27,31 @@ class PantallaInicio extends React.Component {
   };
   Entrar() {
     if (!!this.state.usuario && !!this.state.contrasena) {
-      fetch(
+      const url =
         'https://guia10-vc190544.000webhostapp.com/apiusuario.php?comando=autenticar&usuario=' +
-          this.state.usuario +
-          '&contrasena=' +
-          this.state.contrasena,
-        {
-          method: 'GET',
-        },
-      )
-        .then(response => response.json())
-        .then(responseJson => {
-          console.log(responseJson);
-          const encontrado = responseJson.encontrado;
+        this.state.usuario +
+        '&contrasena=' +
+        this.state.contrasena;
+      console.log(url);
+      fetch(url,{
+        method: 'GET',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json'
+        }
+    })
+        .then(response => {
+          
+          response.json();
+          console.log(response.json());
+        })
+        .then(data => {
+          console.log(data);
+          const encontrado = data.encontrado;
           // Alert("Mensaje="+mensaje);
           if (encontrado == 'si') {
-            this.props.navigation.navigate('ListarProductos');
+            this.props.navigation.navigate('listarProductos');
+            //navigation.navigate('listarProductos');
           } else {
             Alert.alert(
               'Usuario',
@@ -121,7 +130,7 @@ class PantallaInicio extends React.Component {
   }
 }
 
-class listarProductos extends React.Component {
+class listarProductos extends Component {
   state = {
     elementos: [],
     total: 0,
@@ -227,7 +236,7 @@ class listarProductos extends React.Component {
     );
   }
 }
-class PaginaDetalle extends React.Component {
+class PaginaDetalle extends Component {
   state = {
     nombre: '',
     descripcion: '',
@@ -435,7 +444,7 @@ class PaginaDetalle extends React.Component {
     );
   }
 }
-class PaginaAgregar extends React.Component {
+class PaginaAgregar extends Component {
   state = {
     nombre: '',
     descripcion: '',
@@ -547,8 +556,8 @@ class PaginaAgregar extends React.Component {
     );
   }
 }
-const Stack = createStackNavigator(
-  /*{
+const Stack = createStackNavigator();
+/*{
     Inicio: PantallaInicio,
     ListarProductos: listarProductos,
     Detalles: PaginaDetalle,
@@ -557,19 +566,18 @@ const Stack = createStackNavigator(
   {
     initialRouteName: 'Inicio',
   },*/
-);
 
-export default class App extends React.Component {
+export default class App extends Component {
   render() {
-    return(
+    return (
       <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Inicio" component={PantallaInicio} />
-        <Stack.Screen name="Productos" component={listarProductos} />
-        <Stack.Screen name="Detalle" component={PaginaDetalle} />
-        <Stack.Screen name="Agregar" component={PaginaAgregar} />
-      </Stack.Navigator>
-    </NavigationContainer>
-      );
+        <Stack.Navigator>
+          <Stack.Screen name="Inicio" component={PantallaInicio} />
+          <Stack.Screen name="Productos" component={listarProductos} />
+          <Stack.Screen name="Detalle" component={PaginaDetalle} />
+          <Stack.Screen name="Agregar" component={PaginaAgregar} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    );
   }
 }
