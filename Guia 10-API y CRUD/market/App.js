@@ -55,14 +55,9 @@ class listarProductos extends Component {
       });
   }
   render() {
+    this.cargarRegistros();
     return (
       <View style={{flex: 1}}>
-        <NavigationEvents
-          onWillFocus={() => {
-            // Do your things here
-            this.cargarRegistros();
-          }}
-        />
         <Text
           style={{
             fontSize: 18,
@@ -75,8 +70,8 @@ class listarProductos extends Component {
             marginLeft: 10,
             marginRight: 10,
           }}>
-          {this.state.total}
-          productos
+          {this.state.total+' '}
+          Productos
         </Text>
         <FlatList
           data={this.state.elementos}
