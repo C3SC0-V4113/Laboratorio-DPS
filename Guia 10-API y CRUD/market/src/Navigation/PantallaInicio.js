@@ -17,11 +17,12 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {Input} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { useNavigation } from '@react-navigation/core';
 
-export default function PantallaInicio() {
+export default function PantallaInicio({navigation}) {
   const [usuario, guardarUsuario] = useState('');
   const [contrasena, guardarContrasena] = useState('');
-
+  
   Entrar = async () => {
     try {
       if (!!usuario && !!contrasena) {
@@ -39,7 +40,7 @@ export default function PantallaInicio() {
         // Alert("Mensaje="+mensaje);
         if (encontrado == 'si') {
           console.log('Logeado!!');
-          //props.navigation.navigate('listarProductos');
+          navigation.navigate('Productos');
         } else {
           Alert.alert(
             'Usuario',
