@@ -23,16 +23,22 @@ export default function listarProductos({navigation}) {
     const [elementos, setElementos] = useState([]);
     const [total, setTotal] = useState(0);
 
-    cargarRegistros = () => {
+    cargarRegistros = async () => {
       console.log('Prueba');
-      fetch(
-        'https://guia10-vc190544.000webhostapp.com/api.php?comando=listar',
-        {
-          method: 'GET',
-        },
-      )
-        .then(response => response.json())
-        .then(responseJson => {
+      const url =
+        'https://guia10-vc190544.000webhostapp.com/api.php?comando=listar';
+        try {
+          const respuesta = await fetch(url);
+          const resultax = await respuesta.json();
+          console.log(resultax.records);
+          setElementos(resultax.records);
+          setTotal(resultax.records.length);
+        } catch (error) {
+          console.error(error);
+        }
+      ;
+
+      /*.then(responseJson => {
           console.log(responseJson);
           const listado = responseJson.records;
           console.log(listado);
@@ -41,9 +47,12 @@ export default function listarProductos({navigation}) {
         })
         .catch(error => {
           console.error(error);
-        });
+        });*/
     };
-    cargarRegistros();
+    useEffect(()=>{
+        cargarRegistros();
+    })
+    
     return (
       <View style={{flex: 1}}>
         <Text
@@ -77,7 +86,7 @@ export default function listarProductos({navigation}) {
                 <View style={{height: 80, marginLeft: 5}}>
                   <Text style={{flex: 1, fontSize: 18}}>{item.nombre}</Text>
                   <Text style={{flex: 1, fontSize: 16, fontWeight: 'bold'}}>
-                    ${item.preciodeventa}
+                    {'$'+item.preciodeventa}
                   </Text>
                   <Text style={{flex: 1, fontSize: 14}}>
                     Existencia {item.cantidad}
