@@ -1,28 +1,12 @@
-import React, {useState, Component, useEffect} from 'react';
-import {
-  SafeAreaView,
-  Button,
-  View,
-  Text,
-  Image,
-  TouchableOpacity,
-  Keyboard,
-  Alert,
-  FlatList,
-  StyleSheet,
-  ScrollView,
-} from 'react-native';
-//import {createAppContainer, NavigationEvents} from 'react-navigation';
-import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
+import React, {useState} from 'react';
+import {View, Text, Image, TouchableOpacity, Alert} from 'react-native';
 import {Input} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { useNavigation } from '@react-navigation/core';
 
 export default function PantallaInicio({navigation}) {
   const [usuario, guardarUsuario] = useState('');
   const [contrasena, guardarContrasena] = useState('');
-  
+
   Entrar = async () => {
     try {
       if (!!usuario && !!contrasena) {
@@ -37,7 +21,6 @@ export default function PantallaInicio({navigation}) {
         const resultax = await respuesta.json();
         console.log(resultax);
         const encontrado = resultax.encontrado;
-        // Alert("Mensaje="+mensaje);
         if (encontrado == 'si') {
           console.log('Logeado!!');
           navigation.navigate('Productos');
@@ -69,7 +52,13 @@ export default function PantallaInicio({navigation}) {
   };
   return (
     <View style={{flex: 1, padding: 10}}>
-      <Text style={{fontSize: 34, marginTop: 25, alignSelf: 'center'}}>
+      <Text
+        style={{
+          fontSize: 34,
+          marginTop: 25,
+          alignSelf: 'center',
+          color: 'black',
+        }}>
         Bienvenidos
       </Text>
       <Image

@@ -1,25 +1,9 @@
-import React, {useState, Component, useEffect} from 'react';
-import {
-  SafeAreaView,
-  Button,
-  View,
-  Text,
-  Image,
-  TouchableOpacity,
-  Keyboard,
-  Alert,
-  FlatList,
-  StyleSheet,
-  ScrollView,
-} from 'react-native';
-//import {createAppContainer, NavigationEvents} from 'react-navigation';
-import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
+import React, {useState} from 'react';
+import {View, Text, Image, TouchableOpacity, ScrollView} from 'react-native';
 import {Input} from 'react-native-elements';
-import Icon from 'react-native-vector-icons/FontAwesome';
 
-export default function PaginaDetalle({navigation,route}) {
-     const producto=route.params.item;
+export default function PaginaDetalle({navigation, route}) {
+  const producto = route.params.item;
   console.log('Hola Mundo desde main');
   console.log(producto);
   const [id, setId] = useState(producto.id);
@@ -29,7 +13,6 @@ export default function PaginaDetalle({navigation,route}) {
   const [preciodecosto, setPreciodecosto] = useState(producto.preciodecosto);
   const [cantidad, setCantidad] = useState(producto.cantidad);
   const [fotografia, setFotografia] = useState(producto.fotografia);
- 
 
   Actualizar = () => {
     fetch(
@@ -151,7 +134,6 @@ export default function PaginaDetalle({navigation,route}) {
           </TouchableOpacity>
         </View>
         <View style={{flex: 1, padding: 20}}>
-
           <Input
             label="Nombre"
             value={nombre}
