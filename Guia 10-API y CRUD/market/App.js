@@ -18,12 +18,8 @@ import {createStackNavigator} from '@react-navigation/stack';
 import {Input} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-import PantallaInicio from './src/Navigation/PantallaInicio';
-import listarProductos from './src/Navigation/listarProductos';
-import PaginaAgregar from './src/Navigation/PaginaAgregar';
-import PaginaDetalle from './src/Navigation/PaginaDetalle';
+import Navigation from './src/Navigation/Navigation';
 
-const Stack = createStackNavigator();
 /*{
     Inicio: PantallaInicio,
     ListarProductos: listarProductos,
@@ -34,56 +30,10 @@ const Stack = createStackNavigator();
     initialRouteName: 'Inicio',
   },*/
 
-export default class App extends Component {
-  render() {
-    return (
-      <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen name="Inicio" component={PantallaInicio} />
-          <Stack.Screen
-            name="Productos"
-            component={listarProductos}
-            options={{
-              title: 'Productos',
-              headerStyle: {
-                backgroundColor: '#f4511e',
-              },
-              headerTintColor: '#fff',
-              headerTitleStyle: {
-                fontWeight: 'bold',
-              },
-            }}
-          />
-          <Stack.Screen
-            name="Detalle"
-            component={PaginaDetalle}
-            options={{
-              title: 'Editar producto',
-              headerStyle: {
-                backgroundColor: '#f4511e',
-              },
-              headerTintColor: '#fff',
-              headerTitleStyle: {
-                fontWeight: 'bold',
-              },
-            }}
-          />
-          <Stack.Screen
-            name="Agregar"
-            component={PaginaAgregar}
-            options={{
-              title: 'Agregar producto',
-              headerStyle: {
-                backgroundColor: '#f4511e',
-              },
-              headerTintColor: '#fff',
-              headerTitleStyle: {
-                fontWeight: 'bold',
-              },
-            }}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
-    );
-  }
+export default function App() {
+  return (
+    <NavigationContainer>
+      <Navigation />
+    </NavigationContainer>
+  );
 }
