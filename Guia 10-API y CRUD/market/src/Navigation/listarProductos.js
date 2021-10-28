@@ -84,11 +84,11 @@ export default function listarProductos({navigation}) {
                   source={{uri: item.fotografia}}
                 />
                 <View style={{height: 80, marginLeft: 5}}>
-                  <Text style={{flex: 1, fontSize: 18}}>{item.nombre}</Text>
-                  <Text style={{flex: 1, fontSize: 16, fontWeight: 'bold'}}>
+                  <Text style={{flex: 1, fontSize: 18, color:'black'}}>{item.nombre}</Text>
+                  <Text style={{flex: 1, fontSize: 16, fontWeight: 'bold', color:'black'}}>
                     {'$'+item.preciodeventa}
                   </Text>
-                  <Text style={{flex: 1, fontSize: 14}}>
+                  <Text style={{flex: 1, fontSize: 14, color:'black'}}>
                     Existencia {item.cantidad}
                   </Text>
                 </View>
