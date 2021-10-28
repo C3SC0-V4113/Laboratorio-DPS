@@ -1,4 +1,4 @@
-import React, {useState, Component,useEffect} from 'react';
+import React, {useState, Component, useEffect} from 'react';
 import {
   SafeAreaView,
   Button,
@@ -19,108 +19,8 @@ import {Input} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 import PantallaInicio from './src/Navigation/PantallaInicio';
+import listarProductos from './src/Navigation/listarProductos';
 
-class listarProductos extends Component {
-  state = {
-    elementos: [],
-    total: 0,
-  };
-  static navigationOptions = {
-    title: 'Productos',
-    headerStyle: {
-      backgroundColor: '#f4511e',
-    },
-    headerTintColor: '#fff',
-    headerTitleStyle: {
-      fontWeight: 'bold',
-    },
-  };
-  cargarRegistros() {
-    console.log('Prueba');
-    fetch('https://guia10-vc190544.000webhostapp.com/api.php?comando=listar', {
-      method: 'GET',
-    })
-      .then(response => response.json())
-      .then(responseJson => {
-        console.log(responseJson);
-        const listado = responseJson.records;
-        console.log(listado);
-        this.setState({
-          elementos: listado,
-          total: listado.length,
-        });
-      })
-      .catch(error => {
-        console.error(error);
-      });
-  }
-  render() {
-    this.cargarRegistros();
-    return (
-      <View style={{flex: 1}}>
-        <Text
-          style={{
-            fontSize: 18,
-            textAlign: 'center',
-            height: 40,
-            marginTop: 10,
-            backgroundColor: 'lightgray',
-            textAlignVertical: 'center',
-            borderRadius: 10,
-            marginLeft: 10,
-            marginRight: 10,
-          }}>
-          {this.state.total+' '}
-          Productos
-        </Text>
-        <FlatList
-          data={this.state.elementos}
-          renderItem={({item}) => (
-            <TouchableOpacity
-              key={item.id}
-              //onPress = {() => this.alertItemName(item)}
-              onPress={() => this.props.navigation.navigate('Detalle', item)}>
-              <View
-                style={{flexDirection: 'row', marginTop: 15, marginLeft: 2}}>
-                <Image
-                  style={{width: 90, height: 90}}
-                  source={{uri: item.fotografia}}
-                />
-                <View style={{height: 80, marginLeft: 5}}>
-                  <Text style={{flex: 1, fontSize: 18}}>{item.nombre}</Text>
-                  <Text style={{flex: 1, fontSize: 16, fontWeight: 'bold'}}>
-                    ${item.preciodeventa}
-                  </Text>
-                  <Text style={{flex: 1, fontSize: 14}}>
-                    Existencia {item.cantidad}
-                  </Text>
-                </View>
-              </View>
-            </TouchableOpacity>
-          )}
-          keyExtractor={item => item.id}
-        />
-        <TouchableOpacity
-          style={{
-            borderWidth: 1,
-            borderColor: 'rgba(0,0,0,0.2)',
-            alignItems: 'center',
-            justifyContent: 'center',
-            width: 70,
-            position: 'absolute',
-            bottom: 10,
-            right: 10,
-            height: 70,
-            backgroundColor: 'red',
-            borderRadius: 100,
-          }}
-          onPress={() => this.props.navigation.navigate('Agregar')}>
-          <Icon name="plus" size={30} color="white" />
-        </TouchableOpacity>
-      </View>
-    );
-  }
-}
 class PaginaDetalle extends Component {
   state = {
     nombre: '',
@@ -264,7 +164,7 @@ class PaginaDetalle extends Component {
           </View>
           <View style={{flex: 1, padding: 20}}>
             {
-              onWillFocus=() => {
+              (onWillFocus = () => {
                 // Do your things here
                 console.log('Entro aqui' + navigation.getParam('nombre'));
                 this.setState({
@@ -276,7 +176,7 @@ class PaginaDetalle extends Component {
                   fotografia: navigation.getParam('fotografia'),
                   id: navigation.getParam('id'),
                 });
-              }
+              })
             }
             <Input
               label="Nombre"
@@ -458,7 +358,20 @@ export default class App extends Component {
       <NavigationContainer>
         <Stack.Navigator>
           <Stack.Screen name="Inicio" component={PantallaInicio} />
-          <Stack.Screen name="Productos" component={listarProductos} />
+          <Stack.Screen
+            name="Productos"
+            component={listarProductos}
+            options={{
+              title: 'Productos',
+              headerStyle: {
+                backgroundColor: '#f4511e',
+              },
+              headerTintColor: '#fff',
+              headerTitleStyle: {
+                fontWeight: 'bold',
+              },
+            }}
+          />
           <Stack.Screen name="Detalle" component={PaginaDetalle} />
           <Stack.Screen name="Agregar" component={PaginaAgregar} />
         </Stack.Navigator>
