@@ -24,13 +24,13 @@ export default function listarProductos({navigation}) {
     const [total, setTotal] = useState(0);
 
     cargarRegistros = async () => {
-      console.log('Prueba');
+      //console.log('Prueba');
       const url =
         'https://guia10-vc190544.000webhostapp.com/api.php?comando=listar';
         try {
           const respuesta = await fetch(url);
           const resultax = await respuesta.json();
-          console.log(resultax.records);
+          //console.log(resultax.records);
           setElementos(resultax.records);
           setTotal(resultax.records.length);
         } catch (error) {
@@ -76,7 +76,7 @@ export default function listarProductos({navigation}) {
             <TouchableOpacity
               key={item.id}
               //onPress = {() => this.alertItemName(item)}
-              onPress={() => navigation.navigate('Detalle', item)}>
+              onPress={() => navigation.navigate('Detalle', {item: item})}>
               <View
                 style={{flexDirection: 'row', marginTop: 15, marginLeft: 2}}>
                 <Image
