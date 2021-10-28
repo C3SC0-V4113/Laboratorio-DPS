@@ -79,7 +79,7 @@ class listarProductos extends Component {
             <TouchableOpacity
               key={item.id}
               //onPress = {() => this.alertItemName(item)}
-              onPress={() => this.props.navigation.navigate('Detalles', item)}>
+              onPress={() => this.props.navigation.navigate('Detalle', item)}>
               <View
                 style={{flexDirection: 'row', marginTop: 15, marginLeft: 2}}>
                 <Image
@@ -263,8 +263,8 @@ class PaginaDetalle extends Component {
             </TouchableOpacity>
           </View>
           <View style={{flex: 1, padding: 20}}>
-            <NavigationEvents
-              onWillFocus={() => {
+            {
+              onWillFocus=() => {
                 // Do your things here
                 console.log('Entro aqui' + navigation.getParam('nombre'));
                 this.setState({
@@ -276,8 +276,8 @@ class PaginaDetalle extends Component {
                   fotografia: navigation.getParam('fotografia'),
                   id: navigation.getParam('id'),
                 });
-              }}
-            />
+              }
+            }
             <Input
               label="Nombre"
               value={this.state.nombre}
