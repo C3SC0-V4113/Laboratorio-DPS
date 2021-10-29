@@ -23,7 +23,7 @@ export default function PantallaInicio({navigation}) {
         const encontrado = resultax.encontrado;
         if (encontrado == 'si') {
           console.log('Logeado!!');
-          navigation.navigate('Productos');
+          navigation.navigate('Clientes');
         } else {
           Alert.alert(
             'Usuario',
@@ -68,7 +68,7 @@ export default function PantallaInicio({navigation}) {
           alignSelf: 'center',
           marginTop: 15,
         }}
-        source={require('../../imagenes/market.jpg')}
+        source={require('../../imagenes/client.png')}
       />
       <View style={{marginLeft: 10, marginRight: 10}}>
         <Input

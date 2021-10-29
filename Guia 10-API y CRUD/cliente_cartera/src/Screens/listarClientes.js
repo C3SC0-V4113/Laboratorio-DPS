@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {View, Text, Image, TouchableOpacity, FlatList} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-export default function listarProductos({navigation}) {
+export default function listarClientes({navigation}) {
   {
     const [elementos, setElementos] = useState([]);
     const [total, setTotal] = useState(0);

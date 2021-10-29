@@ -1,7 +1,7 @@
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 
-import listarProductos from '../Screens/listarProductos';
+import listarClientes from '../Screens/listarClientes';
 import PaginaAgregar from '../Screens/PaginaAgregar';
 import PaginaDetalle from '../Screens/PaginaDetalle';
 import PantallaInicio from '../Screens/PantallaInicio';
@@ -19,10 +19,10 @@ export default function Navigation() {
         }}
       />
       <Stack.Screen
-        name="Productos"
-        component={listarProductos}
+        name="Clientes"
+        component={listarClientes}
         options={{
-          title: 'Productos',
+          title: 'Clientes',
           headerStyle: {
             backgroundColor: '#f4511e',
           },
