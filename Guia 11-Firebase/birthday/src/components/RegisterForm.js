@@ -7,7 +7,7 @@ import {
   View,
 } from 'react-native';
 import {validateEmail} from '../utils/validation';
-import api from '../utils/firebase';
+import firebase from '../utils/firebase';
 export default function RegisterForm(props) {
   const {changeForm} = props;
   const [formData, setFormData] = useState(defaultValue());
@@ -27,7 +27,7 @@ export default function RegisterForm(props) {
       errors.password = true;
       errors.repeatPassword = true;
     } else {
-      api
+      firebase
         .auth()
         .createUserWithEmailAndPassword(formData.email, formData.password)
         .catch(() => {

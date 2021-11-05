@@ -4,10 +4,10 @@ import moment from 'moment';
 import AddBirthday from './AddBirthday';
 import ActionBar from './ActionBar';
 import Birthday from './Birthday';
-import api from '../utils/firebase';
+import firebase from '../utils/firebase';
 import '@react-native-firebase/firestore'
-api.firestore().settings({experimentalForceLongPolling: true});
-const db = api.firestore(api);
+firebase.firestore().settings({experimentalForceLongPolling: true});
+const db = firebase.firestore(firebase);
 export default function ListBirthday(props) {
   const {user} = props;
   const [showList, setShowList] = useState(true);
