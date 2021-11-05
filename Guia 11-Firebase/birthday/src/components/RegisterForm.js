@@ -7,7 +7,9 @@ import {
   View,
 } from 'react-native';
 import {validateEmail} from '../utils/validation';
-import firebase from '../utils/firebase';
+//import firebase from '../utils/firebase';
+import { firebase } from '@react-native-firebase/auth';
+
 export default function RegisterForm(props) {
   const {changeForm} = props;
   const [formData, setFormData] = useState(defaultValue());

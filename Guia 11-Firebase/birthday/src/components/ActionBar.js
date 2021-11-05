@@ -1,6 +1,7 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
-import firebase from '../utils/firebase';
+//import firebase from '../utils/firebase';
+import { firebase } from '@react-native-firebase/auth';
 export default function ActionBar(props) {
   const {showList, setShowList} = props;
   return (
